@@ -1,0 +1,55 @@
+Synapse SQL Queries
+
+SELECT
+     *
+FROM
+    OPENROWSET(
+        BULK 'https://olistbdatastorageaccount.dfs.core.windows.net/olistdata/silver/',
+        FORMAT = 'PARQUET'
+    ) AS result1
+
+
+create schema gold
+
+create view gold.final 
+as 
+SELECT
+     *
+FROM
+    OPENROWSET(
+        BULK 'https://olistbdatastorageaccount.dfs.core.windows.net/olistdata/silver/',
+        FORMAT = 'PARQUET'
+    ) AS result1
+
+
+
+select * from gold.final
+
+
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'd8TySvmWr4rPBUk';
+CREATE DATABASE SCOPED CREDENTIAL punitadmin WITH IDENTITY = 'Managed Identity';
+
+select * from sys.database_credentials
+
+
+CREATE EXTERNAL FILE FORMAT extfileformat WITH (
+    FORMAT_TYPE = PARQUET,
+    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'
+);
+
+CREATE EXTERNAL DATA SOURCE goldlayer WITH (
+    LOCATION = 'https://olistdatastorageaccount.dfs.core.windows.net/olistdata/gold/',
+    CREDENTIAL = punitadmin
+);
+
+
+CREATE EXTERNAL TABLE gold.finaltable WITH (
+        LOCATION = 'Serving',
+        DATA_SOURCE = goldlayer,
+        FILE_FORMAT = extfileformat
+) AS
+SELECT * FROM gold.final2;
+
+select * from gold.finaltable
+
+select * from gold.final2
