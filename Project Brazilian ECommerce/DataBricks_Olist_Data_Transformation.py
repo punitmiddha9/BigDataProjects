@@ -2,7 +2,7 @@
 print("Hi")
 
 # COMMAND ----------
-
+# Placeholder for Credentials
 storage_account = "olistbdatastorageaccount"
 application_id = "5606d483-7c44-4b85-9e8e-7192549d4adb"
 directory_id = "8c83089b-f79d-4f55-a682-b70d65cfcb57"
@@ -10,7 +10,7 @@ directory_id = "8c83089b-f79d-4f55-a682-b70d65cfcb57"
 spark.conf.set(f"fs.azure.account.auth.type.{storage_account}.dfs.core.windows.net", "OAuth")
 spark.conf.set(f"fs.azure.account.oauth.provider.type.{storage_account}.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
 spark.conf.set(f"fs.azure.account.oauth2.client.id.{storage_account}.dfs.core.windows.net", application_id)
-spark.conf.set(f"fs.azure.account.oauth2.client.secret.{storage_account}.dfs.core.windows.net", "-zE8Q~MsPdBi85WpEyW6eziRwYLgvyBanNWMecEc")
+spark.conf.set(f"fs.azure.account.oauth2.client.secret.{storage_account}.dfs.core.windows.net", "<secret>")
 spark.conf.set(f"fs.azure.account.oauth2.client.endpoint.{storage_account}.dfs.core.windows.net", f"https://login.microsoftonline.com/{directory_id}/oauth2/token")
 
 # COMMAND ----------

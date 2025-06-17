@@ -25,8 +25,8 @@ FROM
 
 select * from gold.final
 
-
-CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'd8TySvmWr4rPBUk';
+-- d8TySvmWr4rPBUk
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<PASSWORD>';
 CREATE DATABASE SCOPED CREDENTIAL punitadmin WITH IDENTITY = 'Managed Identity';
 
 select * from sys.database_credentials
